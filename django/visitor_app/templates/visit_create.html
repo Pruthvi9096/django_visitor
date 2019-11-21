@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+<h1>Create Visit</h1>
+
+<form action="save/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            {{ form.phone }}
+        </div>
+        <div class="form-group">
+            {{ form.email }}
+        </div>
+        <div class="form-group">
+            {{ form.visit_to }}
+        </div>
+        <div class="form-group">
+            {{ form.department }}
+        </div>
+        <div class="form-group">
+            {{ form.purpose }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
