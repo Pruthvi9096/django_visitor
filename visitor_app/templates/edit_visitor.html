@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+<h1>Edit Visitor</h1>
+
+<form action="{% url 'save_info' visitor.id%}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name }} 
+        </div>
+        <div class="form-group">
+            {{ form.phone }}
+        </div>
+        <div class="form-group">
+            {{ form.email }}
+        </div>
+        <div class="form-group">
+            <a href="{% url 'open_webcam' %}">Take Picture</a>
+        </div>
+       
+        <button type="submit" class="btn btn-primary" context="{'test':True}">Submit</button>
+    </form>
+</div>
+{% endblock %}

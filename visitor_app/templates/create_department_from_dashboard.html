@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+<h1>Create Department</h1>
+
+<form action="/visitor_app/save_department/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name }} 
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

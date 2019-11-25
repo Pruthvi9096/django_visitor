@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Visitors</h1>
+<a href="{% url 'create_employee'  %}" class="btn btn-primary">
+Create Visitor
+</a>
+<a href="{% url 'visit_index'  %}" class="btn btn-primary">
+Back
+</a>
+<br/><br/>
+<div class="row">
+	{% for line in visitor %}
+        <div class="card mb-2" style="min-width: 33% !important;">
+            <div class="card-body">
+                <h3>{{line.name}}</h3>
+                <h5 class="card-title">{{ line.phone }}</h5>
+                <p class="card-text">{{ line.email }}</p>
+                <a href="{% url 'edit_info' line.id%}">Edit</a>
+                <a href="{% url 'delete_info' line.id%}" style="color: red; margin-left: 5px; ">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

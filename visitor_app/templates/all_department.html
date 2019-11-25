@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Departments</h1>
+<a href="{% url 'create_department'  %}" class="btn btn-primary">
+Create Department
+</a>
+<a href="{% url 'visit_index'  %}" class="btn btn-primary">
+Back
+</a>
+<br/>
+<br/>
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Department Name</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in department %}
+                <tr>
+                    <th scope="row">{{line.id}}</th>
+                    <td> {{line.department_name}} </td>
+                    <td><a href="{% url 'delete_department' line.id %}" style="color:red;"> X </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+</div>
+{% endblock %}

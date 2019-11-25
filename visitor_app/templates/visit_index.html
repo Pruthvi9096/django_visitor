@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Visits</h1>
+<a href="{% url 'create_visit' %}" class="btn btn-primary">
+Create Visit
+</a>
+<a href="{% url 'all_visitor' %}" class="btn btn-primary">
+View All Visitor
+</a>
+<a href="{% url 'all_department' %}" class="btn btn-primary">
+View All Departments
+</a>
+<br/>
+<br/>
+<div class="row">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Visitor Name</th>
+                <th scope="col">Visit To</th>
+                <th scope="col">Department</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Check In</th>
+                <th scope="col">Check Out</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in visit %}
+                <tr>
+                    <th scope="row">{{line.id}}</th>
+                    <td> <a href="{% url 'visit_profile' line.visitor_name.id%}"> {{line.visitor_name}} </a></td>
+                    <td> {{line.visit_to}}</td>
+                    <td> {{line.department}} </td>
+                    <td> {{line.purpose}}</td>
+                    <td> {{line.checkIn_time}}</td>
+                    <td> {{line.checkOut_time}}</td>
+                    {% if line.checkIn_time == None %}
+                    <td><a href="{% url 'check_in' line.id%}" class="btn btn-primary">Check In</a></td>
+                    {% endif %}
+                    {% if line.checkOut_time == None and line.checkIn_time != None %}
+                    <td> <a href="{% url 'check_out' line.id%}" class="btn btn-primary">Check Out</a></td>
+                    {% endif %}
+                    <td><a href="{% url 'delete_record' line.id %}" style="color:red;"> X </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+</div>
+{% endblock %}
