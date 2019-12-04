@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from blog.models import Post, Comment
 from blog.forms import CommentForm
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login/')
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
     context = {

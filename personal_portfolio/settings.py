@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'projects',
     'blog',
     'visitor_app',
+    'accounts',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

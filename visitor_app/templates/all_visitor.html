@@ -13,6 +13,7 @@ Back
         <div class="card mb-2" style="min-width: 33% !important;">
             <div class="card-body">
                 <h3>{{line.name}}</h3>
+               <!--  <img src="/media/gallery/{{line.image}}"/> -->
                 <h5 class="card-title">{{ line.phone }}</h5>
                 <p class="card-text">{{ line.email }}</p>
                 <a href="{% url 'edit_info' line.id%}">Edit</a>

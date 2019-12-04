@@ -4,7 +4,11 @@ from visitor_app.forms import VisitForm,VisitorForm,VisitForForm,DepartmentForm
 from django.http import HttpResponseRedirect,HttpResponse
 import cv2
 from datetime import datetime
+import base64
+from django.core.files.base import ContentFile
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login/')
 def visit_index(request):
     visit = Visit.objects.all().order_by('-pk')
     context = {
@@ -94,7 +98,8 @@ def save_visitor(request):
     visitor = Visitor(
         name = request.POST["name"],
         email = request.POST["email"],
-        phone = request.POST["phone"]
+        phone = request.POST["phone"],
+        image = request.POST["image"]
     )
     visitor.save()
     return HttpResponseRedirect('/visitor_app/create')
@@ -103,12 +108,14 @@ def visitor_save(request):
     visitor = Visitor(
         name = request.POST["name"],
         email = request.POST["email"],
-        phone = request.POST["phone"]
+        phone = request.POST["phone"],
+        image = request.POST["image"]
     )
     visitor.save()
     return HttpResponseRedirect('/visitor_app/view_all_visitor')
 
 def open_webcam(request):
+    form = VisitorForm()
     cam = cv2.VideoCapture(0)
 
     cv2.namedWindow("test")
@@ -129,7 +136,10 @@ def open_webcam(request):
         elif k%256 == 32:
             # SPACE pressed
             img_name = "opencv_frame_{}.png".format(img_counter)
-            cv2.imwrite(img_name, frame)
+            # cv2.imwrite(img_name, frame)
+            retval,buffer = cv2.imencode(img_name,frame)
+            form.fields["image"].initial = ContentFile(base64.b64encode(buffer))
+            print("-------------",form.fields["image"].initial)
             print("{} written!".format(img_name))
             img_counter += 1
 
@@ -137,7 +147,7 @@ def open_webcam(request):
 
     cv2.destroyAllWindows()
 
-    return HttpResponse("Photo Taken")
+    return HttpResponseRedirect('/visitor_app/create_visitor')
 
 def add_employee(request):
     
@@ -206,6 +216,7 @@ def edit_info(request,pk):
     form.fields['name'].initial = visitor.name
     form.fields['email'].initial = visitor.email
     form.fields['phone'].initial = visitor.phone
+    form.fields['image'].initial = visitor.image
     context = {
         'form':form,
         'visitor':visitor
@@ -228,5 +239,6 @@ def save_info(request,pk):
     visitor.name = request.POST["name"]
     visitor.email = request.POST["email"]
     visitor.phone = request.POST["phone"]
+    visitor.image = request.POST["image"]
     visitor.save()
     return HttpResponseRedirect('/visitor_app/view_all_visitor')

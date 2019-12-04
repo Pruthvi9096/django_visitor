@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from projects.models import Project
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login/')
 def project_index(request):
     projects = Project.objects.all()
     context = {

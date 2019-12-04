@@ -18,7 +18,12 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'visit_index' %}">Visit</a>
             </li>
-           
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Login/Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout_page' %}">Logout</a>
+            </li>
           </ul>
         </div>
     </div>
@@ -27,6 +32,15 @@
 
 <div class="container">
     {% block page_content %}{% endblock %}
+</div>
+
+<div class="container">
+  <ol class="breadcrumb my-4">
+    {% block breadcrumb %}
+    {% endblock %}
+  </ol>
+  {% block content %}
+  {% endblock %}
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
