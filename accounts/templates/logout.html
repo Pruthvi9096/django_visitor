@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<h1>Logged Out</h1>
+ <div class="content">
+        <div class="section-inner clearfix">
+ 
+        <p>You are logged out. <a href="{% url 'login' %}">Click here</a> to login again.</p>
+ 
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="logo mb-3">
+             <div class="col-md-12 text-center">
+              <h1>Login</h1>
+             </div>
+          </div>
+    <form method="post">
+  {% csrf_token %}
+<div class="row">
+  
+    <div class="col-md-5 mx-auto">
+        <div class="card mb-2"  style="border-radius: 32px !important;">
+            <div class="card-body">
+              <table>
+                <tbody>
+                  <tr>
+                    <th><label style="margin-bottom: 2.5rem !important;" for="id_username">Username:</label></th>
+                    <td><input type="text" class="form-control" name="username" autofocus required id="id_username"><br/><br/>  </td></tr>
+                  
+                  <tr>
+                    <th><label style="margin-bottom: 2.5rem !important;" for="id_password">Password:</label></th>
+                    <td><input type="password" class="form-control" name="password" required id="id_password"><br/><input type="checkbox" onclick="myFunction()">Show Password<br/><br/>  </td>
+                  <script type="text/javascript">
+                    function myFunction() {
+                      var x = document.getElementById("id_password");
+                      if (x.type === "password") {
+                        x.type = "text";
+                      } else {
+                        x.type = "password";
+                      }
+                    }
+                  </script>
+                  </tr>
+                </tbody>
+              </table>
+                <div class="col-md-12 text-center ">
+                    <button type="submit" class=" btn btn-block mybtn btn-success tx-tfm">Login</button>
+                </div>
+            </div>
+            <div class="col-md-12 text-center ">
+              <a href="{% url 'password_reset'%}">Reset Password</a>
+            </div>
+            <div class="col-md-12 text-center ">
+              Don't Have an Account ? <a href="{% url 'signup'%}">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>
+  </div>
+{% endblock %}
