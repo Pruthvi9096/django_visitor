@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Visits</h1>
+<a href="{% url 'create_visit' %}" class="btn btn-primary">
+Create Visit
+</a>
+<div class="row">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Visitor Name</th>
+                <th scope="col">Visit To</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Check In</th>
+                <th scope="col">Check Out</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in visit %}
+                <tr>
+                    <th scope="row">{{line.id}}</th>
+                    <td> {{line.visitor_name}}</td>
+                    <td> {{line.visit_to}}</td>
+                    <td> {{line.purpose}}</td>
+                    <td> {{line.checkIn_time}}</td>
+                    <td> {{line.checkOut_time}}</td>
+            {% endfor %}
+        </tbody>
+
+</div>
+{% endblock %}
